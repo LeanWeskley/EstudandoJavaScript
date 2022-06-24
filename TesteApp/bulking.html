@@ -22,18 +22,26 @@
 <body>
     <h1><center>Cálculo de Bulking</center></h1>
     <button onclick="calcular()">Calcular bulking</button>
-    <section>
+    <section id="resultado">
         <p>O resultado vai aparecer aqui</p>
     </section>
     <script>
+        // (105−89)÷16×1000+259,74
         function calcular(){
             let gastoDiario = 259.74
-            let nome = window.prompt('Qual é o seu nome?')
-            let pesoAtual = window.prompt('Qual é o seu peso?')
+            let gramaMil = 1000
             let pesoObjetivo = window.prompt('Qual seu objetivo de peso?')
-            let gramaMedia = window.prompt('Quantos g de comida você comer por dia?')
+            let pesoAtual = window.prompt('Qual é o seu peso?')
+            let gramaMediaDia = window.prompt('Quantos g de comida você comer por dia?')
             let quantidadeDias = window.prompt('Deseja chegar nesse peso em quantos dias?')
-            bulking = (pesoObjetivo-pesoAtual) / (quantidadeDias + gastoDiario)
+            let bulking = (pesoObjetivo-pesoAtual) / quantidadeDias * gramaMil + gastoDiario
+            let superavit = (pesoObjetivo-pesoAtual) / quantidadeDias * gramaMil + gastoDiario - gramaMediaDia
+            let resultado1 = document.getElementById('resultado')
+            if (superavit > 0) {
+                resultado.innerHTML = `<p>Você já come ${gramaMediaDia}g por dia, porém você tem que aumentar ${superavit.toFixed(0)}g para chegar em ${bulking.toFixed(0)}g e conseguir o seu peso em ${quantidadeDias} dias.</p>`
+            } else {
+                resultado.innerHTML = `<p>Você já come ${gramaMediaDia}g por dia, porém você tem que diminuir ${superavit.toFixed(0)}g para chegar em ${bulking.toFixed(0)}g e conseguir o seu peso em ${quantidadeDias} dias.</p>`
+            }
         }
     </script>
 </body>
